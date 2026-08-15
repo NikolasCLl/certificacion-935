@@ -1,0 +1,344 @@
+/* ==========================================
+   ESTILOS GENERALES Y CONFIGURACIÓN
+   ========================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    padding: 20px;
+}
+
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: #1e293b;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+h2 {
+    color: #0f172a;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #334155;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+/* ==========================================
+   UTILIDADES Y ALERTAS
+   ========================================== */
+.oculta {
+    display: none !important;
+}
+
+.alerta {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.alerta-duplicado {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+/* ==========================================
+   FORMULARIO DE REGISTRO
+   ========================================== */
+.formulario-seccion {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+}
+
+.grupo-form {
+    margin-bottom: 15px;
+}
+
+.grupo-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.grupo-form input,
+.grupo-form select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.grupo-form input:focus,
+.grupo-form select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.seccion-extra {
+    background-color: #f8fafc;
+    padding: 15px;
+    border-left: 4px solid #2563eb;
+    border-radius: 4px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.grupo-input-boton {
+    display: flex;
+    gap: 10px;
+}
+
+.grupo-input-boton input {
+    flex: 1;
+}
+
+/* ==========================================
+   BOTONES
+   ========================================== */
+button {
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.btn-principal {
+    background-color: #2563eb;
+    color: white;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.btn-secundario {
+    background-color: #0284c7;
+    color: white;
+    white-space: nowrap;
+}
+
+.btn-imprimir {
+    background-color: #059669;
+    color: white;
+}
+
+.btn-especial {
+    background-color: #7c3aed;
+    color: white;
+}
+
+.btn-limpiar {
+    background-color: #dc2626;
+    color: white;
+}
+
+.btn-marcar-pedido {
+    background-color: #16a34a;
+    color: white;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+
+.btn-eliminar {
+    background-color: #ef4444;
+    color: white;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+}
+
+.btn-ver-mapa-tabla {
+    display: inline-block;
+    margin-top: 5px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.btn-ver-mapa-tabla:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   BARRA DE BÚSQUEDA
+   ========================================== */
+.busqueda-seccion {
+    margin-bottom: 25px;
+}
+
+.busqueda-seccion input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================
+   SECCIONES Y TABLAS DE DATOS
+   ========================================== */
+.tabla-seccion {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.encabezado-tabla {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.acciones-tabla {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+}
+
+th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 700;
+}
+
+tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* BADGES / ETIQUETAS DE ESTADO */
+.badge-pendiente {
+    background-color: #fef3c7;
+    color: #d97706;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.badge-realizado {
+    background-color: #dcfce7;
+    color: #15803d;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.badge-domicilio {
+    background-color: #f3e8ff;
+    color: #6b21a8;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.badge-recoge {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* ==========================================
+   REGLAS DE IMPRESIÓN EXCLUSIVA
+   ========================================== */
+@media print {
+    /* Ocultar absolutamente todo en la pantalla */
+    body * {
+        visibility: hidden !important;
+    }
+
+    /* Ocultar botones e interfaces de control */
+    .no-imprimir, 
+    button, 
+    .acciones-tabla, 
+    .busqueda-seccion, 
+    .formulario-seccion,
+    .btn-ver-mapa-tabla {
+        display: none !important;
+    }
+
+    /* Mostrar unicamente la sección activa elegida para imprimir */
+    .seccion-imprimir-activa, 
+    .seccion-imprimir-activa * {
+        visibility: visible !important;
+    }
+
+    /* Ajustar la sección activa a la parte superior de la página impresa */
+    .seccion-imprimir-activa {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+    }
+
+    table {
+        width: 100% !important;
+        border: 1px solid #ccc !important;
+    }
+
+    th, td {
+        border: 1px solid #ddd !important;
+        padding: 8px !important;
+    }
+
+    /* Filtro para el botón: Imprimir solo envíos a domicilio */
+    body.imprimir-solo-domicilio tr.fila-recoge {
+        display: none !important;
+    }
+}

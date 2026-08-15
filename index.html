@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificación 935 - Control de Faltantes y Clientes</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>🛠️ Registro de Faltantes y Pedidos - Certificación 935</h1>
+
+        <!-- ALERTA DE DUPLICADOS -->
+        <div id="mensaje-alerta" class="alerta oculta"></div>
+
+        <!-- FORMULARIO DE REGISTRO -->
+        <section class="formulario-seccion no-imprimir">
+            <h2>➕ Agregar Registro</h2>
+            <form id="form-faltante">
+                <div class="grupo-form">
+                    <label for="codigo">Código del Producto (opcional):</label>
+                    <input type="text" id="codigo" placeholder="Ej. 101052">
+                </div>
+
+                <div class="grupo-form">
+                    <label for="nombre">Nombre / Descripción del Producto:*</label>
+                    <input type="text" id="nombre" required placeholder="Ej. Pinza de presión 10 pulgadas">
+                </div>
+
+                <div class="grupo-form">
+                    <label for="marca">Marca:</label>
+                    <select id="marca">
+                        <option value="TRUPER">TRUPER</option>
+                        <option value="PRETUL">PRETUL</option>
+                        <option value="VOLTECK">VOLTECK</option>
+                        <option value="FOSET">FOSET</option>
+                        <option value="FIERO">FIERO</option>
+                        <option value="HERMEX">HERMEX</option>
+                        <option value="KLINTEK">KLINTEK</option>
+                        <option value="OTRA">OTRA</option>
+                    </select>
+                </div>
+
+                <div class="grupo-form">
+                    <label for="tipo-registro">Tipo de Registro:</label>
+                    <select id="tipo-registro" onchange="evaluarOpcionesCliente()">
+                        <option value="faltante">Faltante General de Tienda</option>
+                        <option value="cliente">Pedido Especial de Cliente</option>
+                    </select>
+                </div>
+
+                <!-- OPCIONES DE CLIENTE -->
+                <div id="seccion-cliente-opciones" class="seccion-extra oculta">
+                    <h3>👤 Datos del Cliente</h3>
+                    <div class="grupo-form">
+                        <label for="nombre-cliente">Nombre del Cliente:</label>
+                        <input type="text" id="nombre-cliente" placeholder="Ej. Juan Pérez">
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="tel-cliente">Teléfono de Contacto:</label>
+                        <input type="tel" id="tel-cliente" placeholder="Ej. 5512345678">
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="tipo-entrega">Tipo de Entrega:</label>
+                        <select id="tipo-entrega" onchange="evaluarOpcionesCliente()">
+                            <option value="tienda">Recoge en Tienda</option>
+                            <option value="domicilio">Envío a Domicilio</option>
+                        </select>
+                    </div>
+
+                    <!-- CAMPOS DE DOMICILIO -->
+                    <div id="seccion-domicilio-campos" class="seccion-extra oculta">
+                        <div class="grupo-form">
+                            <label for="direccion-entrega">Dirección Completa:</label>
+                            <input type="text" id="direccion-entrega" placeholder="Calle, número, colonia...">
+                        </div>
+
+                        <div class="grupo-form">
+                            <label for="referencias">Referencias de Entrega:</label>
+                            <input type="text" id="referencias" placeholder="Ej. Casa color portón blanco...">
+                        </div>
+
+                        <div class="grupo-form">
+                            <label for="link-maps">Enlace o Coordenadas de Google Maps:</label>
+                            <div class="grupo-input-boton">
+                                <input type="text" id="link-maps" placeholder="Pega el enlace de Maps aquí">
+                                <button type="button" class="btn-secundario" onclick="abrirGoogleMapsFormulario()">🗺️ Abrir Maps</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-principal">💾 Guardar Registro</button>
+            </form>
+        </section>
+
+        <!-- BARRA DE BÚSQUEDA GENERAL -->
+        <section class="busqueda-seccion no-imprimir">
+            <input type="text" id="input-busqueda" placeholder="🔍 Buscar por código, producto, marca o cliente...">
+        </section>
+
+        <!-- TABLA 1: FALTANTES DE TIENDA -->
+        <section id="seccion-pendientes" class="tabla-seccion">
+            <div class="encabezado-tabla">
+                <h2>📋 Faltantes de Tienda</h2>
+                <div class="acciones-tabla no-imprimir">
+                    <button class="btn-imprimir" onclick="imprimirPendientes()">🖨️ Imprimir Faltantes</button>
+                    <button class="btn-limpiar" onclick="limpiarLista('pendientes')">🗑️ Limpiar Lista</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha / Hora</th>
+                        <th>Código</th>
+                        <th>Marca</th>
+                        <th>Producto / Descripción</th>
+                        <th>Estado</th>
+                        <th class="no-imprimir">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-pendientes"></tbody>
+            </table>
+        </section>
+
+        <!-- TABLA 2: PEDIDOS DE CLIENTES -->
+        <section id="seccion-clientes" class="tabla-seccion">
+            <div class="encabezado-tabla">
+                <h2>👤 Pedidos de Clientes</h2>
+                <div class="acciones-tabla no-imprimir">
+                    <button class="btn-imprimir" onclick="imprimirClientes()">🖨️ Imprimir Todo Clientes</button>
+                    <button class="btn-imprimir btn-especial" onclick="imprimirEnviosDomicilio()">🚚 Imprimir Solo Envíos</button>
+                    <button class="btn-limpiar" onclick="limpiarLista('clientes')">🗑️ Limpiar Lista</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha / Hora</th>
+                        <th>Producto (Código/Marca)</th>
+                        <th>Cliente / Teléfono</th>
+                        <th>Modalidad</th>
+                        <th>Detalles de Entrega</th>
+                        <th>Estado</th>
+                        <th class="no-imprimir">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-clientes"></tbody>
+            </table>
+        </section>
+
+        <!-- TABLA 3: REALIZADOS -->
+        <section id="seccion-realizados" class="tabla-seccion">
+            <div class="encabezado-tabla">
+                <h2>✅ Registros Realizados / Surtidos</h2>
+                <div class="acciones-tabla no-imprimir">
+                    <button class="btn-imprimir" onclick="imprimirRealizados()">🖨️ Imprimir Realizados</button>
+                    <button class="btn-limpiar" onclick="limpiarLista('realizados')">🗑️ Limpiar Lista</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha / Hora</th>
+                        <th>Código</th>
+                        <th>Marca</th>
+                        <th>Producto / Descripción</th>
+                        <th>Estado</th>
+                        <th class="no-imprimir">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-realizados"></tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- SDKs de Firebase Compatibles -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <!-- Tu script de la app -->
+    <script src="app.js"></script>
+</body>
+</html>
